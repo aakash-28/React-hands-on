@@ -5,7 +5,7 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
     class Dishdetail extends Component{
         constructor(props){
             super(props);
-            this.state = { selectedDish : this.props.selectedDish
+            this.state = { selectedDish : this.props.dish
             }
         }
         renderDish(dish){
@@ -36,7 +36,7 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
                 <div key={comment.id}>
                  <li>
                    <p>{comment.comment}</p> 
-                   <p>--{comment.author} , {comment.date}</p>
+                   <p>--{comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                  </li>
                 </div>
             );}
@@ -45,18 +45,19 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,
             }
         }); 
     }
-    render() { if(!this.props.selectedDish) return(null)
+    render() { if(!this.props.dish) return(null)
         return( <> 
+        <div className="container">
     <div className="container">
     <div className="row">
     <div className="col-md-5 m-1">
-    {this.renderDish(this.props.selectedDish)}
+    {this.renderDish(this.props.dish)}
     </div>
     <div  className="col-md-5 m-1"> <h4>Comments</h4>
          <ul className = "list-unstyled">
-       {this.renderComments(this.props.selectedDish)} 
-        </ul>
-    </div> </div> </div> </>); }
+       {this.renderComments(this.props.dish)} 
+        </ul> 
+    </div> </div> </div> </div> </>); }
 
 }
 export default Dishdetail;
