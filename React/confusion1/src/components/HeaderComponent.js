@@ -17,12 +17,12 @@ class Header extends Component {
 
       toggleNav() {
         this.setState({
-          isNavOpen: !this.state.isModalOpen
+          isNavOpen: !this.state.isNavOpen
         });
       }
       toggleModal() {
         this.setState({
-          isModalOpen: !this.state.isNavOpen
+          isModalOpen: !this.state.isModalOpen
         });
       }
       handleLogin(event){
