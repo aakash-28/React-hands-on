@@ -59,7 +59,7 @@ import {Link} from 'react-router-dom';
         else if  (this.state.touched.lastname && this.state.lastname.length > 10)
         errors.lastname='Last Name should be <=10 characters';
         const reg=/^\d+$/;
-        if (this.state.touched.telnum && !reg.test(telnum))
+        if (this.state.touched.telnum && !reg.test(this.state.telnum))
         errors.telnum='Tel. Number should contain only Numbers';
         if(this.state.touched.email && this.state.email.split('').filter(x=>x==='@').length!==1)
         errors.email='Not a valid email';
