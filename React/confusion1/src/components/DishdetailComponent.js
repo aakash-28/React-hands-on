@@ -24,23 +24,36 @@ import { addComment } from '../redux/ActionCreators';
             
     }
     
-  function RenderComments({comments,addComment,dishId}){
-        
-        return comments.map((comment)=> {
-            if (comment!=null){
-            return (
-                <div key={comment.id}>
-                 <li>
-                   <p>{comment.comment}</p> 
-                   <p>--{comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
-                 </li>
-                </div>
-            );}
-            
-            else {
-                return(<div></div>);
-            }
-        }); 
+    function RenderComments({comments, addComment, dishId}) {
+        if (comments == null) {
+            return <div></div>;
+        }
+        let comments_list = comments;
+        const cmnts = comments_list.map(comment => {
+            return (<li key={
+                comment.id
+            }>
+                <p> {
+                    comment.comment
+                }</p>
+                <p>
+                    -- {
+                    comment.author
+                }, &nbsp;{" "}
+                    {
+                    new Intl.DateTimeFormat("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "2-digit"
+                    }).format(new Date(comment.date))
+                }
+                    {" "} </p>
+            </li>);
+        });
+        return (<div>
+            <h4>Comments</h4>
+            <ul className="list-unstyled"> {cmnts} </ul>
+        </div>);
     }
     const DishDetail = (props) => {
          if(!props.dish) return(null)
@@ -63,10 +76,15 @@ import { addComment } from '../redux/ActionCreators';
                 </div>
                 <div className="col-12 col-md-5 m-1">
                 <RenderComments comments={props.comments}
-                 addComment={props.addComment}
-                 dishId={props.dish.id}
-                 />
-                    <CommentForm dishId={dishId} addComment={addComment} />
+        addComment={props.addComment}
+        dishId={props.dish.id}
+      />
+        <CommentForm dishId={
+                        props.dish.id
+                    }
+                    addComment={
+                        props.addComment
+                    }/>
                 </div>
             </div>
             </div>
@@ -98,7 +116,7 @@ class CommentForm extends Component {
 
         this.toggleModal();
         this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
-       
+
     }
 
     render() {
