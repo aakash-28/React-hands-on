@@ -9,12 +9,12 @@ import logger from 'redux-logger';
 export const ConfigureStore =() => {
     const store = createStore(
         combineReducers({
-            dishes:Dishes,
+            dishes: Dishes,
             comments: Comments,
-            promotions:Promotions,
+            promotions: Promotions,
             leaders: Leaders
         }),
-        applyMiddleware(thunk,logger)
+        applyMiddleware(thunk, logger)
     );
     return store;
 }
